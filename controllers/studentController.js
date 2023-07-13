@@ -1,4 +1,3 @@
-const apiFeatures = require("../utils/apiFeatures");
 const { studentStatuses, success, fail } = require("../utils/Constants");
 const Student = require("../models/Student");
 
@@ -14,9 +13,7 @@ exports.addStudent = async (req, res) => {
 
 exports.getStudent = async (req, res) => {
   try {
-    const features = new apiFeatures(Student, req.query);
-    const filteredFeatures = features.filter().paginate().sort().limitFields();
-    const students = await filteredFeatures.query;
+    const students = await Student.findAll();
     res.status(200).json({
       status: success,
       results: students.length,
@@ -47,6 +44,7 @@ exports.singleStudent = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(object);
     const data = req.body;
     const student = await Student.findByPk(id);
     if (!student) {

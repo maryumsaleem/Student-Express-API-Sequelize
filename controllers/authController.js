@@ -9,7 +9,8 @@ const { authMessages, success, fail } = require("../utils/Constants");
 exports.Signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const newUser = await User.create({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 12); // Hash the password
+    const newUser = await User.create({ name, email, password: hashedPassword }); // Store the hashed password
     const token = jwt.sign({ id: newUser.id }, process.env.LOGIN_TOKEN);
     res.status(200).json({
       status: success,
@@ -36,11 +37,13 @@ exports.Signup = async (req, res, next) => {
 exports.Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log(email);
     if (!email || !password) {
       return res.status(400).json({
         status: fail,
         message: authMessages.requiredEmail,
       });
+      
     }
     const user = await User.findOne({ where: { email } });
     if (!user) {

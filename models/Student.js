@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
+//const User = require('./User');
+
 
 //defining a model
 const Student = sequelize.define('student', {
@@ -39,5 +41,8 @@ const Student = sequelize.define('student', {
 }, {
   timestamps: false, // Disable the default createdAt and updatedAt columns
 });
+// Define the association
+//Student.belongsTo(User, { foreignKey: 'id' });
+
 
 module.exports = Student;
