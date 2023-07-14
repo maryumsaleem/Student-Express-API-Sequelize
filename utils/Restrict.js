@@ -1,4 +1,4 @@
-const { restrictedStatuses, fail } = require("./Constants");
+const { restrictedStatuses, fail } = require("../constants/Constants");
 /*** Restrict Users---> Assigning roles and permissions ***/
 exports.RestrictTo = (...roles) => {
   return (req, res, next) => {

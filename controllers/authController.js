@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 //load env vars
 dotenv.config({ path: "../config/config.env" });
-const { authMessages, success, fail } = require("../utils/Constants");
+const { authMessages, success, fail } = require("../constants/Constants");
 
 exports.Signup = async (req, res, next) => {
   try {

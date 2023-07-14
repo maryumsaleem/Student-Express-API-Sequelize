@@ -4,7 +4,7 @@ const util = require("util");
 const dotenv = require("dotenv");
 //load env vars
 dotenv.config({ path: "../config/config.env" });
-const { protectMessages, success, fail } = require("../utils/Constants");
+const { protectMessages, success, fail } = require("../constants/Constants");
 
 exports.Protect = async (req, res, next) => {
   try {

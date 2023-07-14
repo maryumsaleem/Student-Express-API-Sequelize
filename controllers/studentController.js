@@ -1,4 +1,4 @@
-const { studentStatuses, success, fail } = require("../utils/Constants");
+const { studentStatuses, success, fail } = require("../constants/Constants");
 const Student = require("../models/Student");
 
 exports.addStudent = async (req, res) => {
@@ -44,7 +44,7 @@ exports.singleStudent = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(object);
+   // console.log(object);
     const data = req.body;
     const student = await Student.findByPk(id);
     if (!student) {

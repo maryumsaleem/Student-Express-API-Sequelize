@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db.js');
 const bcrypt = require('bcrypt');
-//const Student = require('./student');
+const Student = require('./Student');
 
 const User = sequelize.define('user', {
   name: {
@@ -35,7 +35,6 @@ User.beforeCreate(async (user) => {
 });
 
 // Define the association
-//User.hasOne(Student, { foreignKey: 'id' });
-
+User.belongsTo(Student, { foreignKey: 'id' });
 
 module.exports = User;
