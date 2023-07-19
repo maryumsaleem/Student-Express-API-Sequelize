@@ -3,13 +3,16 @@ const app = express();
 const routes = require("./routes/routes");
 const dotenv = require("dotenv");
 const sequelize = require("./db");
+const { Protect } = require("./utils/Protect"); // Add this line to include the Protect middleware
 
-//load env vars
+// Load env vars
 dotenv.config({ path: "./config/config.env" });
 
 /************** Middlewares ****************/
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(Protect); // Use the Protect middleware to verify user token and extract user information
 
 app.use("/", routes);
 

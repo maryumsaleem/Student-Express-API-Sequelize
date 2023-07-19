@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const DataTypes  = require('sequelize');
 const sequelize = require('../db.js');
 const bcrypt = require('bcrypt');
-const Student = require('./Student');
+const Role = require('./Roles'); // Add this line to include the Role model
 
 const User = sequelize.define('user', {
   name: {
@@ -23,10 +23,6 @@ const User = sequelize.define('user', {
       len: [8, Infinity],
     },
   },
-  role: {
-    type: DataTypes.ENUM('user', 'lead', 'admin'),
-    defaultValue: 'user',
-  },
 });
 
 User.beforeCreate(async (user) => {
@@ -35,6 +31,6 @@ User.beforeCreate(async (user) => {
 });
 
 // Define the association
-User.belongsTo(Student, { foreignKey: 'id' });
+User.belongsTo(Role, { foreignKey: 'roleId' }); // Add this line to associate users with roles
 
 module.exports = User;

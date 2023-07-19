@@ -1,5 +1,6 @@
 const { studentStatuses, success, fail } = require("../constants/Constants");
 const Student = require("../models/Student");
+const { RestrictTo } = require("../utils/Restrict");
 
 exports.addStudent = async (req, res) => {
   try {
@@ -44,7 +45,6 @@ exports.singleStudent = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   try {
     const { id } = req.params;
-   // console.log(object);
     const data = req.body;
     const student = await Student.findByPk(id);
     if (!student) {
